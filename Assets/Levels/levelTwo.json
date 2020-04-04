@@ -1,0 +1,20 @@
+{
+	"tanks": [
+		{
+			"tankName": 0,
+			"waitTimeAfter": 1000
+		},
+		{
+			"tankName": 0,
+			"waitTimeAfter": 1000
+		},
+		{
+			"tankName": 0,
+			"waitTimeAfter": 1000
+		},
+		{
+			"tankName": 0,
+			"waitTimeAfter": 1000
+		}
+	]
+}
