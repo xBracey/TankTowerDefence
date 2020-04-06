@@ -35,13 +35,6 @@ public class friendlyTank : MonoBehaviour
         return radius;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        //Use the same vars you use to draw your Overlap SPhere to draw your Wire Sphere.
-        Gizmos.DrawWireSphere(transform.position, 1f);
-    }
-
     private void createBullet(Vector3 enemyTankPosition)
     {
         GameObject bullet = new GameObject("Bullet");

@@ -4,7 +4,11 @@
 	"editor.autoClosingQuotes": "always",
 	"editor.autoClosingBrackets": "always",
 	"editor.formatOnSave": true,
-	"blueprint.templatesPath": ["./.vscode/.templates"]
+	"blueprint.templatesPath": ["./.vscode/.templates"],
+	"files.associations": {
+		"*.uxml": "xml",
+		"*.uss": "css"
+	}
 	// "editor.codeActionsOnSave": {
 	// 	"source.fixAll": true
 	// }

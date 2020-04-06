@@ -12,6 +12,7 @@ public class enemyTankGameObject : MonoBehaviour
     bool tankReachedEnd = false;
     public int health = 10;
     Text coin;
+    Text lives;
 
     // Start is called before the first frame update
     private void Start()
@@ -22,6 +23,9 @@ public class enemyTankGameObject : MonoBehaviour
 
         GameObject coinObject = GameObject.Find("coins");
         coin = coinObject.GetComponent<Text>();
+
+        GameObject livesObject = GameObject.Find("lives");
+        lives = livesObject.GetComponent<Text>();
     }
 
     private void Update()
@@ -43,21 +47,21 @@ public class enemyTankGameObject : MonoBehaviour
 
     private void Move()
     {
-        if (waypointIndex == waypoints.Length)
-        {
-            tankReachedEnd = true;
-            return;
-        }
-
         transform.position = Vector2.MoveTowards(
             transform.position,
             waypoints[waypointIndex].transform.position,
             moveSpeed * Time.deltaTime
         );
 
-        if (transform.position == waypoints[waypointIndex].transform.position)
+        if (transform.position == waypoints[waypointIndex].transform.position && waypointIndex + 1 != waypoints.Length)
         {
             waypointIndex += 1;
+        }
+        else if (transform.position == waypoints[waypointIndex].transform.position && waypointIndex + 1 == waypoints.Length)
+        {
+            tankReachedEnd = true;
+            lives.text = (Int32.Parse(lives.text) - 1).ToString();
+            Destroy(gameObject);
         }
     }
 

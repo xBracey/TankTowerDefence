@@ -1,0 +1,44 @@
+{
+	"levelArray": [
+		{
+			"tanks": [
+				{
+					"tankName": 2,
+					"waitTimeAfter": 500
+				},
+				{
+					"tankName": 2,
+					"waitTimeAfter": 500
+				},
+				{
+					"tankName": 2,
+					"waitTimeAfter": 500
+				},
+				{
+					"tankName": 2,
+					"waitTimeAfter": 500
+				}
+			]
+		},
+		{
+			"tanks": [
+				{
+					"tankName": 0,
+					"waitTimeAfter": 1000
+				},
+				{
+					"tankName": 0,
+					"waitTimeAfter": 1000
+				},
+				{
+					"tankName": 0,
+					"waitTimeAfter": 1000
+				},
+				{
+					"tankName": 0,
+					"waitTimeAfter": 1000
+				}
+			]
+		}
+	]
+}

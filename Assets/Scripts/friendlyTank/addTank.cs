@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class addTank : MonoBehaviour
 {
     GameObject map;
+    GameObject sidebar;
     Text price;
+    Vector3 openPosition;
     protected string tankName;
     protected float tankRadius;
 
@@ -14,6 +16,8 @@ public class addTank : MonoBehaviour
     void Start()
     {
         map = GameObject.Find("map");
+        sidebar = GameObject.Find("Sidebar");
+        openPosition = sidebar.transform.localPosition;
 
         Button button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(AddTank);
@@ -21,6 +25,8 @@ public class addTank : MonoBehaviour
 
     public void AddTank()
     {
+        sidebar.transform.localPosition = openPosition;
+
         map mapScript = map.GetComponent<map>();
 
         mapScript.tank = GameObject.Find(tankName);
