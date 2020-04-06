@@ -20,10 +20,10 @@ public class enemyTankDefinitions
     {
         tanks = new Dictionary<Tanks, enemyTank>();
 
-        tanks.Add(Tanks.blueTank, new enemyTank("blueTank", 0.6f, 10));
-        tanks.Add(Tanks.redTank, new enemyTank("redTank", 1f, 4));
-        tanks.Add(Tanks.bigRedTank, new enemyTank("bigRedTank", 0.4f, 15));
-        tanks.Add(Tanks.greenTank, new enemyTank("greenTank", 1.5f, 4));
+        tanks.Add(Tanks.blueTank, new enemyTank("blueTank", 0.6f, 5));
+        tanks.Add(Tanks.redTank, new enemyTank("redTank", 1f, 2));
+        tanks.Add(Tanks.bigRedTank, new enemyTank("bigRedTank", 0.4f, 10));
+        tanks.Add(Tanks.greenTank, new enemyTank("greenTank", 1.5f, 6));
     }
 
     public enemyTank GetTank(Tanks tankName)

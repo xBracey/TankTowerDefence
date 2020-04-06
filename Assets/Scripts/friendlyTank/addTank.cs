@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class addTank : MonoBehaviour
 {
+    [SerializeField]
+    GameObject tank;
+
     GameObject map;
     GameObject sidebar;
     Text price;
     Vector3 openPosition;
-    protected string tankName;
-    protected float tankRadius;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class addTank : MonoBehaviour
 
         map mapScript = map.GetComponent<map>();
 
-        mapScript.tank = GameObject.Find(tankName);
+        mapScript.tank = tank;
 
         BoxCollider collider = map.GetComponent<BoxCollider>();
         collider.enabled = true;

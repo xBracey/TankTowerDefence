@@ -10,7 +10,5 @@ public class mapOneLevels : levelManager
     {
         base.Start();
         levels = JsonUtility.FromJson<levels>(File.ReadAllText("Assets/Levels/mapOne.json"));
-
-        Debug.Log(levels.levelArray[0].tanks);
     }
 }

@@ -8,20 +8,38 @@ public class friendlyTank : MonoBehaviour
     protected int fireTickRate = 30;
     protected int price = 100;
 
+    public bool placed = false;
+
+    int level = 1;
+    int killCount = 0;
+    int xp = 0;
+
     [SerializeField]
     Sprite bulletSprite;
 
     int ticker = 0;
 
+    stats tankStats;
+
+    private void Start()
+    {
+        tankStats = GameObject.Find("tankStats").GetComponent<stats>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        ticker++;
-
-        if (ticker == fireTickRate)
+        if (ticker == fireTickRate && placed)
         {
-            ticker = 0;
-            CheckEnemyTank();
+            bool enemyTank = CheckEnemyTank();
+            if (enemyTank)
+            {
+                ticker = 0;
+            }
+        }
+        else if (placed)
+        {
+            ticker++;
         }
     }
 
@@ -51,24 +69,25 @@ public class friendlyTank : MonoBehaviour
 
         bullet bulletScript = bullet.GetComponent<bullet>();
         bulletScript.enemyTankPosition = enemyTankPosition;
+        bulletScript.tankFiredFrom = gameObject.GetComponent<friendlyTank>();
     }
 
-    private void CheckEnemyTank()
+    private bool CheckEnemyTank()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
-        int i = 0;
         bool hitEnemyTank = false;
 
-        while (i < hitColliders.Length && !hitEnemyTank)
+        for (int i = 0; i < hitColliders.Length; i++)
         {
             if (hitColliders[i].gameObject.tag == "enemyTank")
             {
                 changeAngle(hitColliders[i].transform.position);
                 createBullet(hitColliders[i].transform.position);
-                hitEnemyTank = true;
+                return true;
             }
-            i++;
         }
+
+        return false;
     }
 
     private void changeAngle(Vector3 enemyTankPosition)
@@ -94,5 +113,40 @@ public class friendlyTank : MonoBehaviour
             z
         );
 
+    }
+
+    public void AddKill()
+    {
+        killCount++;
+        xp += 10;
+        checkLevelUp();
+    }
+
+    void OnMouseDown()
+    {
+        checkLevelUp();
+        tankStats.statSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        tankStats.sellNumber = price / 4;
+        tankStats.upgradeNumber = price / 2;
+        tankStats.levelNumber = level;
+        tankStats.killCountNumber = killCount;
+        tankStats.xpNumber = calculateXPLeft();
+        tankStats.newStats = true;
+    }
+
+    void checkLevelUp()
+    {
+        int xpNeeded = level * 100;
+        if (xp >= xpNeeded)
+        {
+            xp = xp - xpNeeded;
+            level++;
+        }
+    }
+
+    int calculateXPLeft()
+    {
+        int xpNeeded = level * 100;
+        return xpNeeded - xp;
     }
 }

@@ -11,8 +11,8 @@ public class enemyTankGameObject : MonoBehaviour
     int waypointIndex = 0;
     bool tankReachedEnd = false;
     public int health = 10;
-    Text coin;
-    Text lives;
+    numberedText coins;
+    numberedText lives;
 
     // Start is called before the first frame update
     private void Start()
@@ -21,11 +21,9 @@ public class enemyTankGameObject : MonoBehaviour
         SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
         renderer.sortingLayerName = "Foreground";
 
-        GameObject coinObject = GameObject.Find("coins");
-        coin = coinObject.GetComponent<Text>();
+        coins = GameObject.Find("coins").GetComponent<numberedText>();
 
-        GameObject livesObject = GameObject.Find("lives");
-        lives = livesObject.GetComponent<Text>();
+        lives = GameObject.Find("lives").GetComponent<numberedText>(); ;
     }
 
     private void Update()
@@ -38,9 +36,7 @@ public class enemyTankGameObject : MonoBehaviour
 
         if (health <= 0)
         {
-            int coinInt = Int32.Parse(coin.text);
-            coinInt += 25;
-            coin.text = coinInt.ToString();
+            coins.addNumber(10);
             Destroy(gameObject);
         }
     }
@@ -60,7 +56,7 @@ public class enemyTankGameObject : MonoBehaviour
         else if (transform.position == waypoints[waypointIndex].transform.position && waypointIndex + 1 == waypoints.Length)
         {
             tankReachedEnd = true;
-            lives.text = (Int32.Parse(lives.text) - 1).ToString();
+            lives.addNumber(-1);
             Destroy(gameObject);
         }
     }

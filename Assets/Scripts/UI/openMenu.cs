@@ -8,6 +8,8 @@ public class openMenu : MonoBehaviour
     GameObject sidebar;
     Vector3 openPosition;
     Vector3 closePosition;
+    [SerializeField]
+    bool open = true;
 
     void Start()
     {
@@ -17,7 +19,12 @@ public class openMenu : MonoBehaviour
         closePosition = new Vector3(openPosition.x - 200, openPosition.y, openPosition.z);
 
         Button button = gameObject.GetComponent<Button>();
-        button.onClick.AddListener(OpenMenu);
+        
+        if (open) {
+            button.onClick.AddListener(OpenMenu);
+        } else {
+            button.onClick.AddListener(CloseMenu);
+        }
     }
 
     public void OpenMenu()

@@ -9,12 +9,11 @@ public class map : MonoBehaviour
     public GameObject tank;
     GameObject validPlacement;
     GameObject invalidPlacement;
-    Text coin;
+    numberedText coins;
 
     private void Start()
     {
-        GameObject coinObject = GameObject.Find("coins");
-        coin = coinObject.GetComponent<Text>();
+        coins = GameObject.Find("coins").GetComponent<numberedText>();
 
         validPlacement = GameObject.Find("validPlacement");
         invalidPlacement = GameObject.Find("invalidPlacement");
@@ -72,13 +71,14 @@ public class map : MonoBehaviour
 
         if (canPlaceTank)
         {
-            int coinInt = Int32.Parse(coin.text);
+            int coinInt = coins.getTextNumber();
             int tankPrice = tank.GetComponent<friendlyTank>().getPrice();
 
             if (coinInt >= tankPrice)
             {
                 GameObject newTank = Instantiate(tank);
                 newTank.transform.position = newPosition;
+
                 SpriteRenderer renderer = newTank.GetComponent<SpriteRenderer>();
                 renderer.sortingLayerName = "Foreground";
 
@@ -86,7 +86,10 @@ public class map : MonoBehaviour
                 collider.enabled = true;
 
                 coinInt += -tankPrice;
-                coin.text = coinInt.ToString();
+                coins.setNumber(coinInt);
+
+                friendlyTank newTankScript = newTank.GetComponent<friendlyTank>();
+                newTankScript.placed = true;
             }
         }
 

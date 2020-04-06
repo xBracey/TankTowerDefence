@@ -7,13 +7,7 @@ public struct levels
     [System.Serializable]
     public struct level
     {
-        [System.Serializable]
-        public struct spawnTank
-        {
-            public Tanks tankName;
-            public int waitTimeAfter;
-        }
-        public spawnTank[] tanks;
+        public string[] tanks;
     }
 
     public level[] levelArray;

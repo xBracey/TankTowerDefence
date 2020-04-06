@@ -81,12 +81,12 @@ public class levelManager : MonoBehaviour
 
     async public void PlayLevel(int levelCounter)
     {
-        levels.level.spawnTank[] tanks = levels.levelArray[levelCounter - 1].tanks;
+        string[] tanks = levels.levelArray[levelCounter - 1].tanks;
 
         for (int i = 0; i < tanks.Length; i++)
         {
-            AddTank(tanks[i].tankName);
-            await PutTaskDelay(tanks[i].waitTimeAfter);
+            AddTank(GetTankName(tanks[i]));
+            await PutTaskDelay(GetTankWait(tanks[i]));
         }
 
         allTanksSpawned = true;
@@ -104,8 +104,17 @@ public class levelManager : MonoBehaviour
         newTankScript.health = enemyTank.GetHealth();
     }
 
-    public int getLevelCounter()
+    Tanks GetTankName(string tank)
     {
-        return levelCounter;
+        string[] separator = { "-" };
+        string[] tankStringSplit = tank.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+        return (Tanks)Int32.Parse(tankStringSplit[0]);
+    }
+
+    int GetTankWait(string tank)
+    {
+        string[] separator = { "-" };
+        string[] tankStringSplit = tank.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+        return Int32.Parse(tankStringSplit[1]);
     }
 }

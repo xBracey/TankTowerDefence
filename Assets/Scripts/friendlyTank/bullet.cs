@@ -5,9 +5,16 @@ using UnityEngine;
 public class bullet : MonoBehaviour
 {
     [SerializeField]
-    float moveSpeed = 5f;
+    float moveSpeed = 8f;
+    numberedText coins;
 
+    public friendlyTank tankFiredFrom;
     public Vector3 enemyTankPosition;
+
+    void Start()
+    {
+        coins = GameObject.Find("coins").GetComponent<numberedText>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,6 +43,11 @@ public class bullet : MonoBehaviour
         {
             enemyTankGameObject tank = collider.gameObject.GetComponent<enemyTankGameObject>();
             tank.health += -1;
+            coins.addNumber(1);
+            if (tank.health == 0)
+            {
+                tankFiredFrom.AddKill();
+            }
             Destroy(gameObject);
         }
     }
